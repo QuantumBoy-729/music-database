@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="header fixed-top">
+        <nav class="navbar navbar-fixed-top navbar-dark bg-dark">
+            <a class="navbar-brand">
+                <img src="{{url_for('static',filename='images/music_note.png')}}" width=30px height=30px>
+               {{user.username}}
+            </a>
+        
+        </nav>
+        
+    </div>
+
+    <div class="container-fluid">
+            <div class="row flex-nowrap">
+        <div class="col-auto col-md-2 col-xl-1 col-2 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <ul class="nav nav-pills flex-column mb-sm-auto align-middle align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link align-middle px-0">
+                             <span class="ms-1 d-none d-sm-inline align-middle">Logout</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/playlist/{{user.id}}" data-bs-toggle="collapse" class="nav-link  align-middle px-0">
+                        <span class="ms-1 d-none d-sm-inline align-middle">Playlist</span> </a>
+                    </li>
+                    <li>
+                        <a href="/upload" data-bs-toggle="collapse" class="nav-link  align-middle px-0">
+                        <span class="ms-1 d-none d-sm-inline align-middle">Add</span> </a>
+                    </li>
+                
+                </ul>
+                <hr>
+               
+            </div>
+            
+        </div>
+        <div class="col-auto col-md-4 container margin">
+                {% for song in songs %}
+                <div class="p-3 mb-2 bg-dark text-dark">
+                    <a class="songs" href="/details/{{song.id}}">{{ song.song_name }}</a>
+                    <audio controls="controls" src="{{ song.file_path }}"></audio>
+                    <form action="/playlist/{{user.id}}" method="POST">
+                        <input type="hidden" name="song_id" id="song_id" value="{{ song.id }}">
+                        <input type="hidden" name="user_id" id="user_id" value="{{ user.id }}">
+                        <button class="w-50 btn btn-lg btn-secondary" type="submit">Add to Playlist</button>
+                    </form>
+                    <br>
+                    <form action = "/deleteSong" method = "POST">
+                        <input type="hidden" name="to_delete" id = "to_delete" value={{song.id}}>
+                        <input type="hidden" name="u_id" id="u_id" value="{{ user.id }}">
+                        <button class="w-50 btn btn-lg btn-danger" type="submit">Remove Song</button>
+                    </form>
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+        </div>
+       
+    </div>
+        
+        
+        
+    <!-- {% for song in songs %}
+        <div>
+            <span>Song :{{ song.song_name }}</span>
+            <audio controls="controls" src="{{ song.file_path }}"></audio>
+            <form action="/playlist" method="POST">
+                <input type="text" name="song_id" id="song_id" value="{{ song.id }}">
+        
+                <input type="submit" value="Add To Playlist">
+            </form>
+        </div>
+        <br>
+    {% endfor %} -->
+
+    <!-- <footer class="fixed-bottom">
+        <audio src="{{url_for('static',filename='music/musicog.ogg')}}" controls='controls' type="file/ogg"></audio>
+    </footer> -->
+
+
+
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="header fixed-top">
+        <nav class="navbar navbar-fixed-top navbar-dark bg-dark">
+            <a class="navbar-brand">
+                <img src="{{url_for('static',filename='images/music_note.png')}}" width=30px height=30px>
+                Username
+            </a>
+        
+        </nav>
+        
+    </div>
+
+    <div class="container-fluid">
+            <div class="row flex-nowrap">
+        <div class="col-auto col-md-2 col-xl-1 col-2 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <ul class="nav nav-pills flex-column mb-sm-auto align-middle align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link align-middle px-0">
+                             <span class="ms-1 d-none d-sm-inline align-middle">Logout</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/playlist" data-bs-toggle="collapse" class="nav-link  align-middle px-0">
+                        <span class="ms-1 d-none d-sm-inline align-middle">Playlist</span> </a>
+                    </li>
+                
+                </ul>
+                <hr>
+               
+            </div>
+            
+        </div>
+        <div class="col-auto col-md-4 container margin">
+            <div class="p-3 mb-2 bg-dark text-dark">
+                <span class="songs">Song Name: {{song.song_name}}</span>
+                <br>
+                <span class="songs">Artist Name: {{artist.artist_name}}</span>
+                <br>
+                <span class="songs">Album Name: {{album.album_name}}</span>
+                <br>
+                <span class="songs">Genre: {{genre.genre_name}}</span>
+            </div>
+        </div>
+       
+    </div>
+        
+        
+        
+    <!-- {% for song in songs %}
+        <div>
+            <span>Song :{{ song.song_name }}</span>
+            <audio controls="controls" src="{{ song.file_path }}"></audio>
+            <form action="/playlist" method="POST">
+                <input type="text" name="song_id" id="song_id" value="{{ song.id }}">
+        
+                <input type="submit" value="Add To Playlist">
+            </form>
+        </div>
+        <br>
+    {% endfor %} -->
+
+    <!-- <footer class="fixed-bottom">
+        <audio src="{{url_for('static',filename='music/musicog.ogg')}}" controls='controls' type="file/ogg"></audio>
+    </footer> -->
+
+
+
+
+{% endblock %}
